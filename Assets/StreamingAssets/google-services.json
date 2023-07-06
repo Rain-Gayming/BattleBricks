@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "245010719917",
+    "project_id": "battlebricks-6983f",
+    "storage_bucket": "battlebricks-6983f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245010719917:android:195b5e40dae9d93b765224",
+        "android_client_info": {
+          "package_name": "com.RainGaymes.BattleBricks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245010719917-chcuhucq0kaltkp6a0bs12ag410ro41p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-wovQYQiwgG3mayS_zNP3hnAr3l_7YPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245010719917-chcuhucq0kaltkp6a0bs12ag410ro41p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
