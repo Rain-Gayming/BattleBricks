@@ -145,7 +145,7 @@ public class AccountCreation : MonoBehaviour
             confirmLoginText.text = "Logged In";
             userManager.firebaseUserInfo = User;
             userManager.UpdateUserInfo();
-            SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene("Main Menu");
         }
     }
 

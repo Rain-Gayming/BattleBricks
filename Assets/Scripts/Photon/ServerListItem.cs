@@ -23,8 +23,8 @@ public class ServerListItem : MonoBehaviour
 		nameText.text = _info.Name;
 	}
 
-	public void OnClick()
+	public void SetInfo()
 	{
-		Launcher.Instance.JoinRoom(info);
+		Launcher.Instance.selectedRoom = info;
 	}
 }

@@ -10,6 +10,6 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        menuObject.SetActive(open);
+        //menuObject.SetActive(open);
     }
 }

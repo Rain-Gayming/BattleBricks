@@ -20,6 +20,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 	[BoxGroup("Create Server")]
 	[SerializeField] TMP_InputField serverNameInputField;
+	[BoxGroup("Create Server")]
+	public UIValue maxPlayerValue;
 	
 	[BoxGroup("Create Server")]
 	[SerializeField] TMP_Text errorText;
@@ -29,6 +31,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 	[BoxGroup("Server Lists")]
 	[SerializeField] GameObject serverListItemPrefab;
+	[BoxGroup("Server Lists")]
+	public RoomInfo selectedRoom;
 	
 	public TMP_Text timeText;
 
@@ -43,9 +47,16 @@ public class Launcher : MonoBehaviourPunCallbacks
 	}
 
 	private void Update() {
-		timeText.text = System.DateTime.Now.TimeOfDay.Hours.ToString() + " : " + System.DateTime.Now.TimeOfDay.Minutes.ToString();
+		if(timeText)
+			timeText.text = System.DateTime.Now.TimeOfDay.Hours.ToString() + " : " + System.DateTime.Now.TimeOfDay.Minutes.ToString();
 	}
 
+	public void OpenServer()
+	{
+		if(selectedRoom != null)
+			JoinRoom(selectedRoom);
+	}
+	
 	public override void OnConnectedToMaster()
 	{
 		PhotonNetwork.JoinLobby();
@@ -64,7 +75,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 		{
 			return;
 		}
-		PhotonNetwork.CreateRoom(serverNameInputField.text);
+		RoomOptions roomOptions = new RoomOptions();
+		roomOptions.MaxPlayers = (byte)maxPlayerValue.currentValue;
+		PhotonNetwork.CreateRoom(serverNameInputField.text, roomOptions);
 		//MenuManager.instance.OpenMenu("loading");
 	}
 
@@ -78,6 +91,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 		
 	}
 
+
 	public override void OnCreateRoomFailed(short returnCode, string message)
 	{
 		errorText.text = "Room Creation Failed: " + message;
@@ -87,7 +101,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 	public void StartGame()
 	{
-		PhotonNetwork.LoadLevel(1);
+		PhotonNetwork.LoadLevel("World");
 	}
 
 	public void LeaveRoom()
@@ -99,7 +113,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 	public void JoinRoom(RoomInfo info)
 	{
 		PhotonNetwork.JoinRoom(info.Name);
-		MenuManager.instance.OpenMenu("loading");
+		//MenuManager.instance.OpenMenu("loading");
 	}
 
 	public override void OnLeftRoom()
@@ -118,7 +132,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 		{
 			if(roomList[i].RemovedFromList)
 				continue;
-			Instantiate(serverListItemPrefab, serverListContent).GetComponent<ServerListItem>().SetUp(roomList[i]);
+			GameObject newList = Instantiate(serverListItemPrefab);
+			newList.GetComponent<ServerListItem>().SetUp(roomList[i]);
+			newList.transform.SetParent(serverListContent);
+			newList.transform.localScale = Vector3.one;
 		}
 	}
 }
