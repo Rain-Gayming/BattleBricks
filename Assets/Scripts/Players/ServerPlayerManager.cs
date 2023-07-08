@@ -53,12 +53,12 @@ public class ServerPlayerManager : MonoBehaviour
 				}
 				lastSpawnpoint = spawnpoint;
 			}
-			playerPrefab = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerController"), spawnpoint.position, spawnpoint.rotation, 0, new object[] { pv.ViewID });
+			playerPrefab = PhotonNetwork.Instantiate("Player", spawnpoint.position, spawnpoint.rotation, 0, new object[] { pv.ViewID });
 			playerController = playerPrefab.GetComponent<PlayerController>();
 			ServerManager.Instance.playerControllers.Add(playerPrefab);
 		}else if(ServerManager.Instance.isServer){
 			Screen.fullScreen = false;
-			PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ServerController"), Vector3.zero, Quaternion.identity, 0, new object[] { pv.ViewID });		
+			PhotonNetwork.Instantiate(Path.Combine("ServerController"), Vector3.zero, Quaternion.identity, 0, new object[] { pv.ViewID });		
 			
 		}
 		

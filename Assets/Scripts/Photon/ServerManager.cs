@@ -44,7 +44,7 @@ public class ServerManager : MonoBehaviourPunCallbacks
 	{
 		if(scene.buildIndex == 1) // We're in the game scene
 		{
-			PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+			PhotonNetwork.Instantiate("Server Player Manager", Vector3.zero, Quaternion.identity);
 		}
 	}
         

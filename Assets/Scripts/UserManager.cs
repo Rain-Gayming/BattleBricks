@@ -5,13 +5,18 @@ using Firebase.Auth;
 
 public class UserManager : MonoBehaviour
 {
+    public static UserManager instance;
     public FirebaseUser firebaseUserInfo;
     public UserInfo userInfo;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        DontDestroyOnLoad(this);
+        if(instance != null){
+            Destroy(instance);
+        }
+        instance = this;
     }
 
     // Update is called once per frame
