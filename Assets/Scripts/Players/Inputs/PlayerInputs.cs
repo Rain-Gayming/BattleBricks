@@ -314,6 +314,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeFireMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c1ad1f4-54c2-4546-9d6d-2f665a370d03"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""54bbd720-8d1f-464a-8f7b-42c8bbc810dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -448,6 +466,50 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b480607-3a38-4445-b1c8-2aeb53c233c7"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""ChangeFireMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4c365f2-db89-400e-bea3-e9354936711d"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ChangeFireMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""898cb8aa-0e5e-4cce-9d5d-e02e48c279e2"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c2d3ef2-6e87-4ef6-a1d7-375604f7699c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -539,6 +601,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Combat_Equipment = m_Combat.FindAction("Equipment", throwIfNotFound: true);
         m_Combat_Grenade = m_Combat.FindAction("Grenade", throwIfNotFound: true);
         m_Combat_Aim = m_Combat.FindAction("Aim", throwIfNotFound: true);
+        m_Combat_ChangeFireMode = m_Combat.FindAction("ChangeFireMode", throwIfNotFound: true);
+        m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
@@ -690,6 +754,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combat_Equipment;
     private readonly InputAction m_Combat_Grenade;
     private readonly InputAction m_Combat_Aim;
+    private readonly InputAction m_Combat_ChangeFireMode;
+    private readonly InputAction m_Combat_Reload;
     public struct CombatActions
     {
         private @PlayerInputs m_Wrapper;
@@ -703,6 +769,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Equipment => m_Wrapper.m_Combat_Equipment;
         public InputAction @Grenade => m_Wrapper.m_Combat_Grenade;
         public InputAction @Aim => m_Wrapper.m_Combat_Aim;
+        public InputAction @ChangeFireMode => m_Wrapper.m_Combat_ChangeFireMode;
+        public InputAction @Reload => m_Wrapper.m_Combat_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -739,6 +807,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @ChangeFireMode.started += instance.OnChangeFireMode;
+            @ChangeFireMode.performed += instance.OnChangeFireMode;
+            @ChangeFireMode.canceled += instance.OnChangeFireMode;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -770,6 +844,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @ChangeFireMode.started -= instance.OnChangeFireMode;
+            @ChangeFireMode.performed -= instance.OnChangeFireMode;
+            @ChangeFireMode.canceled -= instance.OnChangeFireMode;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -870,6 +950,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnEquipment(InputAction.CallbackContext context);
         void OnGrenade(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnChangeFireMode(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

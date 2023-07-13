@@ -44,6 +44,10 @@ public class InputManager : MonoBehaviour
     public bool equipmentValue;
     [BoxGroup("Combat")]
     public bool grenadeValue;
+    [BoxGroup("Combat")]
+    public bool changeFireModeValue;
+    [BoxGroup("Combat")]
+    public bool reloadValue;
 #endregion
     [BoxGroup("Camera")]
     public Vector2 lookValue;
@@ -97,6 +101,10 @@ public class InputManager : MonoBehaviour
         inupts.Combat.Equipment.canceled += _ => equipmentValue = false;
         inupts.Combat.Grenade.performed += _ => grenadeValue = true;
         inupts.Combat.Grenade.canceled += _ => grenadeValue = false;
+        inupts.Combat.ChangeFireMode.performed += _ => changeFireModeValue = true;
+        inupts.Combat.ChangeFireMode.canceled += _ => changeFireModeValue = false;
+        inupts.Combat.Reload.performed += _ => reloadValue = true;
+        inupts.Combat.Reload.canceled += _ => reloadValue = false;
 #endregion
 
 #region camera

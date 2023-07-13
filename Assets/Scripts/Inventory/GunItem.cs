@@ -16,6 +16,10 @@ public class GunItem : ItemObject
     [BoxGroup("Gun Info")]
     public float range;
     [BoxGroup("Gun Info")]
+    public int maxAmmo;
+    [BoxGroup("Gun Info")]
+    public float reloadTime;
+    [BoxGroup("Gun Info")]
     public List<FireType> fireTypes;
     [BoxGroup("Gun Info")]
     public GameObject bulletPrefab;

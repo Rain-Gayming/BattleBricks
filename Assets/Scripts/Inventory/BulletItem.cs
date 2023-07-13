@@ -11,9 +11,12 @@ public class BulletItem : ItemObject
     public float damage;
     [BoxGroup("Bullet Info")]
     public Caliber caliber;
+    [BoxGroup("Bullet Info")]
+    public string bulletName;
 }
 
 public enum Caliber
 {
-
+    _45acp,
+    _556x45Nato
 }

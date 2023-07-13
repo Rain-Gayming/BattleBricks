@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7117263342173150357}
   - component: {fileID: 5279540168988166805}
   m_Layer: 0
-  m_Name: Server Player Manager
+  m_Name: ServerPlayerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

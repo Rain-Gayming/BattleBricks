@@ -32,6 +32,10 @@ public class AccountCreation : MonoBehaviour
     public Toggle hideEmail;    
     [BoxGroup("Login")]
     public Toggle saveEmail;
+    [BoxGroup("Login")]
+    public Toggle hidePassword;    
+    [BoxGroup("Login")]
+    public Toggle savePassword;
 
     //Register variables
     [BoxGroup("Register")]
@@ -66,6 +70,7 @@ public class AccountCreation : MonoBehaviour
     private void Start()
     {
         emailLoginField.text = PlayerPrefs.GetString("Email");    
+        passwordLoginField.text = PlayerPrefs.GetString("Password");    
     }
 
     private void Update()
@@ -74,6 +79,11 @@ public class AccountCreation : MonoBehaviour
             emailLoginField.contentType = TMP_InputField.ContentType.Password;
         }else{            
             emailLoginField.contentType = TMP_InputField.ContentType.EmailAddress;
+        }
+        if(hidePassword.isOn){
+            passwordLoginField.contentType = TMP_InputField.ContentType.Password;
+        }else{            
+            passwordLoginField.contentType = TMP_InputField.ContentType.EmailAddress;
         }
     }
 
@@ -87,9 +97,6 @@ public class AccountCreation : MonoBehaviour
     //Function for the login button
     public void LoginButton()
     {
-        if(saveEmail.isOn){
-            PlayerPrefs.SetString("Email", emailLoginField.text);
-        }
         //Call the login coroutine passing the email and password
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
     }
@@ -140,6 +147,12 @@ public class AccountCreation : MonoBehaviour
             //User is now logged in
             //Now get the result
             User = LoginTask.Result.User;
+            if(saveEmail.isOn){
+                PlayerPrefs.SetString("Email", emailLoginField.text);
+            }
+            if(savePassword.isOn){
+                PlayerPrefs.SetString("Password", passwordLoginField.text);
+            }
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";

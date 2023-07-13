@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: g_M4A1
   m_EditorClassIdentifier: 
   itemName: M4A1
-  itemDescription: 
+  itemDescription: The M4A1 is a gas-operated, rotating bolt, magazine fed carbine.
+    The M4A1 is an automatic variant of the M4 carbine, which is limited to semi-automatic
+    and 3-round burst fire modes. The M4A1 was designed from the M4 and was adopted
+    by the US Army in 2012.
   itemIcon: {fileID: 0}
   isBase: 0
   weaponReference: {fileID: 0}
@@ -24,6 +27,8 @@ MonoBehaviour:
   fireRateSemi: 0.05
   burstRate: 0
   range: 1080
-  fireTypes: 
+  maxAmmo: 30
+  reloadTime: 3
+  fireTypes: 000000000100000002000000
   bulletPrefab: {fileID: 0}
   bulletImpactPrefab: {fileID: 0}

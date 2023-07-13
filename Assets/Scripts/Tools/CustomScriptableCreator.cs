@@ -1,4 +1,5 @@
 using System.Collections;
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -24,8 +25,8 @@ public class ScriptableCreator : OdinMenuEditorWindow
         tree.Add("Create New Item", createNewItem);
         tree.AddAllAssetsAtPath("Items", "Assets/ScriptableObjects/Items/Items", typeof(ItemObject));
         tree.AddAllAssetsAtPath("Weapons", "Assets/ScriptableObjects/Items/Weapons", typeof(WeaponItem));
-        tree.AddAllAssetsAtPath("Weapons", "Assets/ScriptableObjects/Items/Guns", typeof(GunItem));
-        tree.AddAllAssetsAtPath("Armour", "Assets/ScriptableObjects/Items/Bullets", typeof(BulletItem));
+        tree.AddAllAssetsAtPath("Guns", "Assets/ScriptableObjects/Items/Guns", typeof(GunItem));
+        tree.AddAllAssetsAtPath("Bullets", "Assets/ScriptableObjects/Items/Bullets", typeof(BulletItem));
 
         return tree;
     }
@@ -194,13 +195,13 @@ public class ScriptableCreator : OdinMenuEditorWindow
                 break;
             }
 
-            AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/i_" + itemName + ".asset");
+            AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/i" + itemType + "_" + itemName + ".asset");
             if(weaponItem)
                 AssetDatabase.CreateAsset(weaponItem, "Assets/ScriptableObjects/Items/Weapons/w_" + itemName + ".asset");
             if(gunItem)
                 AssetDatabase.CreateAsset(gunItem, "Assets/ScriptableObjects/Items/Guns/g_" + itemName + ".asset");
             if(bulletItem)
-                AssetDatabase.CreateAsset(bulletItem, "Assets/ScriptableObjects/Items/Bullet/b_" + itemName + ".asset");
+                AssetDatabase.CreateAsset(bulletItem, "Assets/ScriptableObjects/Items/Bullets/b_" + itemName + ".asset");
             AssetDatabase.SaveAssets();
 
             itemName = null;
@@ -208,3 +209,4 @@ public class ScriptableCreator : OdinMenuEditorWindow
         }
     }
 }
+#endif 

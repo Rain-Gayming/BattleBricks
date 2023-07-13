@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public PhotonView view;
     [BoxGroup("References")]
     public Transform lookPoint;
+    [BoxGroup("References")]
+    public bool disabled;
 
     
     [BoxGroup("Ground Movement")]
@@ -56,42 +58,43 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!disabled){
 #region Jumping
-        isGrounded = Physics.CheckSphere(groundCheckPoint.position, range, groundMask);
-        if(isGrounded){
-            rb.drag = drag;
-            if(inputManager.jumpValue){
-                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-                
-                inputManager.jumpValue = false;
+            isGrounded = Physics.CheckSphere(groundCheckPoint.position, range, groundMask);
+            if(isGrounded){
+                rb.drag = drag;
+                if(inputManager.jumpValue){
+                    rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+                    
+                    inputManager.jumpValue = false;
+                }
+            }else{
+                rb.drag = 0;
             }
-        }else{
-            rb.drag = 0;
-        }
-#endregion
+    #endregion
 
 #region Change Move Type
-        if(inputManager.sprintValue){
-            currentMoveType = MoveType.sprinting;
-        }else{
-            currentMoveType = MoveType.walking;
-        }
-        if(inputManager.crouchValue){
-            if(currentMoveType != MoveType.crouching){
-                currentMoveType = MoveType.crouching;
+            if(inputManager.sprintValue){
+                currentMoveType = MoveType.sprinting;
             }else{
                 currentMoveType = MoveType.walking;
             }
-        }
-        if(inputManager.layValue){
-            if(currentMoveType != MoveType.crawling){
-                currentMoveType = MoveType.crawling;
-            }else{
-                currentMoveType = MoveType.walking;
+            if(inputManager.crouchValue){
+                if(currentMoveType != MoveType.crouching){
+                    currentMoveType = MoveType.crouching;
+                }else{
+                    currentMoveType = MoveType.walking;
+                }
             }
-        }
+            if(inputManager.layValue){
+                if(currentMoveType != MoveType.crawling){
+                    currentMoveType = MoveType.crawling;
+                }else{
+                    currentMoveType = MoveType.walking;
+                }
+            }
 #endregion
-    
+        
 #region Ground Movement
 
         switch (currentMoveType)
@@ -115,14 +118,17 @@ public class PlayerMovement : MonoBehaviour
 
         SpeedControl();
 #endregion
+        }
     
     }
 
     private void FixedUpdate() 
     {
-        Vector3 move = lookPoint.forward * inputManager.walkValue.y + lookPoint.right * inputManager.walkValue.x;
+        if(!disabled){
+            Vector3 move = lookPoint.forward * inputManager.walkValue.y + lookPoint.right * inputManager.walkValue.x;
 
-        rb.AddForce(move.normalized * currentSpeed * 10f, ForceMode.Force);
+            rb.AddForce(move.normalized * currentSpeed * 10f, ForceMode.Force);
+        }
     }
 
     public void SpeedControl()

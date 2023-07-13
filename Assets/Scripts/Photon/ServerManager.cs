@@ -42,9 +42,9 @@ public class ServerManager : MonoBehaviourPunCallbacks
 
 	void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
 	{
-		if(scene.buildIndex == 1) // We're in the game scene
+		if(scene.buildIndex == 2) // We're in the game scene
 		{
-			PhotonNetwork.Instantiate("Server Player Manager", Vector3.zero, Quaternion.identity);
+			PhotonNetwork.Instantiate("ServerPlayerManager", Vector3.zero, Quaternion.identity);
 		}
 	}
         

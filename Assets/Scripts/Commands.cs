@@ -14,6 +14,8 @@ public class Commands : MonoBehaviour
     [BoxGroup("References")]
     public PlayerController controller;
     [BoxGroup("References")]
+    public PlayerMovement playerMovement;
+    [BoxGroup("References")]
     public PlayerCamera playerCamera;
     [BoxGroup("References")]
     public PlayerUIController playerUI;
@@ -27,15 +29,16 @@ public class Commands : MonoBehaviour
 
     public void Update()
     {
-        if(console.isActiveAndEnabled){
+        if(console.IsActive){
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            playerCamera.disabled = true;
+            playerMovement.disabled = true;
         }else{
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            {
-                
-            }
+            playerCamera.disabled = false;
+            playerMovement.disabled = false;
         }
     }
 
