@@ -9,11 +9,13 @@ public class UIValue : MonoBehaviour
     public int minValue;
     public int maxValue;
 
+    public bool textIsValue;
     public TMP_Text valueText;
 
     public void Update()
     {
-        valueText.text = currentValue.ToString();
+        if(textIsValue)
+            valueText.text = currentValue.ToString();
     }
 
     public void IncreaseValue()

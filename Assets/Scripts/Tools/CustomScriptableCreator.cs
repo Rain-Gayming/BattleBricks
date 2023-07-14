@@ -108,10 +108,8 @@ public class ScriptableCreator : OdinMenuEditorWindow
         public float range;
         [BoxGroup("Gun Info")] [ShowIf("itemType", ItemType.gun)]
         public List<FireType> fireTypes;
-        [BoxGroup("Gun Info")] [ShowIf("itemType", ItemType.gun)]
-        public GameObject bulletPrefab;
-        [BoxGroup("Gun Info")] [ShowIf("itemType", ItemType.gun)]
-        public GameObject bulletImpactPrefab;
+        [BoxGroup("Gun Info/Audio")] [ShowIf("itemType", ItemType.gun)]
+        public AudioPack shootPack;
 
 #endregion
 
@@ -180,8 +178,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
                     gunItem.fireRateSemi = fireRateSemi;
                     gunItem.burstRate = burstRate;
                     gunItem.range = range;
-                    gunItem.bulletPrefab = bulletPrefab;
-                    gunItem.bulletImpactPrefab = bulletImpactPrefab;
+                    gunItem.shootPack = shootPack;
                 break;
                 case ItemType.bullet:
                     bulletItem = ScriptableObject.CreateInstance<BulletItem>();

@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using Photon.Pun;
 using Sirenix.OdinInspector;
+using UnityEngine.Audio;
 
 public class GunManager : MonoBehaviour
 {
@@ -150,6 +151,7 @@ public class GunManager : MonoBehaviour
         inputManager.shootValue = false;
         PhotonNetwork.Instantiate(Path.Combine("Bullets",  bulletItem.bulletName), shootPoint.position, shootPoint.rotation);
         ammo--;
+        //AudioManager.instance.PlayAudio(gunItem.shootPack.clips[Random.Range(0, gunItem.shootPack.clips.Count)].clipName, "Guns", false);
     }
 
     public void Shoot()

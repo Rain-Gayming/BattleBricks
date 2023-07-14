@@ -191,6 +191,7 @@ MonoBehaviour:
   currentValue: 0
   minValue: 0
   maxValue: 100
+  textIsValue: 1
   valueText: {fileID: 1152743903375220481}
 --- !u!1 &1152743903375220487
 GameObject:

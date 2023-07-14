@@ -21,10 +21,10 @@ public class GunItem : ItemObject
     public float reloadTime;
     [BoxGroup("Gun Info")]
     public List<FireType> fireTypes;
-    [BoxGroup("Gun Info")]
-    public GameObject bulletPrefab;
-    [BoxGroup("Gun Info")]
-    public GameObject bulletImpactPrefab;
+    [BoxGroup("Gun Info/Audio")]
+    public AudioPack shootPack;
+    [BoxGroup("Gun Info/Animation")]
+    public AnimationClip idleAnim;
 }
 
 public enum FireType

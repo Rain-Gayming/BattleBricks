@@ -30,5 +30,5 @@ MonoBehaviour:
   maxAmmo: 30
   reloadTime: 3
   fireTypes: 000000000100000002000000
-  bulletPrefab: {fileID: 0}
-  bulletImpactPrefab: {fileID: 0}
+  shootPack: {fileID: 11400000, guid: 7ca315c0a34f80344be4174f58107c5a, type: 2}
+  idleAnim: {fileID: 7400000, guid: 39e18e4cfc10aa741995d976158fd98d, type: 2}
