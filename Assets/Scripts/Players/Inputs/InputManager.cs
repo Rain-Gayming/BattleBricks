@@ -68,6 +68,7 @@ public class InputManager : MonoBehaviour
 
     [BoxGroup("UI Manager")]
     public bool pauseValue;
+    public bool interact;
 
     private void OnEnable() {
         saveFile = Application.persistentDataPath + "/keybindings.json";
@@ -147,6 +148,8 @@ public class InputManager : MonoBehaviour
 
         inputs.UI.Pause.performed += _ => pauseValue = true;
         inputs.UI.Pause.canceled += _ => pauseValue = false;
+        inputs.UI.Interact.performed += _ => interact = true;
+        inputs.UI.Interact.canceled += _ => interact = false;
 #endregion
     }
     

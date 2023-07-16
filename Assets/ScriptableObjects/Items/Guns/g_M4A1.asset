@@ -22,7 +22,6 @@ MonoBehaviour:
   weaponReference: {fileID: 0}
   gunReference: {fileID: 0}
   bulletReference: {fileID: 0}
-  animLayer: 1
   fireRateAuto: 0.075
   fireRateSemi: 0.05
   burstRate: 0
@@ -32,3 +31,5 @@ MonoBehaviour:
   fireTypes: 000000000100000002000000
   shootPack: {fileID: 11400000, guid: 7ca315c0a34f80344be4174f58107c5a, type: 2}
   idleAnim: {fileID: 7400000, guid: 39e18e4cfc10aa741995d976158fd98d, type: 2}
+  sideGripAnim: {fileID: 7400000, guid: 8fbfcb22b41bd1f4387878b7207bbfd7, type: 2}
+  animLayer: 2

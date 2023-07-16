@@ -20,6 +20,8 @@ public class PlayerController : HealthManager
     [BoxGroup("References")]
     public PlayerCamera playerCamera;
     [BoxGroup("References")]
+    public PlayerUIController uiController;
+    [BoxGroup("References")]
     public Animator anim;
     [BoxGroup("References")]
     public AnimatorOverrideController overrideController;
@@ -75,12 +77,14 @@ public class PlayerController : HealthManager
                 controller.disabled = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                uiController.pauseMenu.SetActive(true);
             }else{
                 paused = false;
                 playerCamera.disabled = false;
                 controller.disabled = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                uiController.pauseMenu.SetActive(false);
             }
             inputManager.pauseValue = false;
         }
@@ -111,4 +115,14 @@ public class PlayerController : HealthManager
         amountOfGrenades--;
         PhotonNetwork.Instantiate("Grenade", grenadePoint.position, camera.transform.rotation);
     }
+
+    public void Unpause()
+    {        
+        paused = false;
+        playerCamera.disabled = false;
+        controller.disabled = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        uiController.pauseMenu.SetActive(false);
+    } 
 }

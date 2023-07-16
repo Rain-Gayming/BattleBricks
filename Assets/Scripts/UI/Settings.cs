@@ -151,6 +151,11 @@ public class Settings : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    public void MatchSensitivity()
+    {
+        ySensitivitySlider.value = xSensitivitySlider.value;
+    }
+
     [ContextMenu("Load")]
     public void ReadFile()
     {
@@ -166,8 +171,8 @@ public class Settings : MonoBehaviour
             musicVolSlider.value = settingsData.musicVolume;
             soundEffectsSlider.value = settingsData.soundEffectsVolume;
 
-            xSensitivitySlider.value = settingsData.xSensitivity;
             ySensitivitySlider.value = settingsData.ySensitivity;
+            xSensitivitySlider.value = settingsData.xSensitivity;
         
         }
     }

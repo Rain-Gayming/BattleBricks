@@ -6,8 +6,6 @@ using Sirenix.OdinInspector;
 public class GunItem : ItemObject
 {
     [BoxGroup("Gun Info")]
-    public int animLayer;
-    [BoxGroup("Gun Info")]
     public float fireRateAuto;
     [BoxGroup("Gun Info")]
     public float fireRateSemi;
@@ -25,6 +23,10 @@ public class GunItem : ItemObject
     public AudioPack shootPack;
     [BoxGroup("Gun Info/Animation")]
     public AnimationClip idleAnim;
+    [BoxGroup("Gun Info/Animation")]
+    public AnimationClip sideGripAnim;
+    [BoxGroup("Gun Info/Animation")]
+    public int animLayer;
 }
 
 public enum FireType

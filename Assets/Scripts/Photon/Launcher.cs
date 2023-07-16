@@ -17,6 +17,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 	public GameObject homeMenu;
 	[BoxGroup("Menus")]
 	public GameObject serverMenu;
+	[BoxGroup("Menus")]
+	public GameObject topBar;
 
 	[BoxGroup("Create Server")]
 	[SerializeField] TMP_InputField serverNameInputField;
@@ -67,6 +69,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 	{
 		// open home menu
 		menu.ChangeMenu(homeMenu);
+		topBar.SetActive(true);
 	}
 
 	public void CreateRoom()

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : HealthManager
 {
     public EnemyAnimator animator;
     // Start is called before the first frame update

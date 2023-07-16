@@ -22,6 +22,8 @@ public class GunManager : MonoBehaviour
     public BulletItem bulletItem;
     [BoxGroup("References")]
     public InputManager inputManager;
+    [BoxGroup("References")]
+    public AnimatorOverrideController overrideController;
 
     [BoxGroup("Gun")]
     public FireType currentFireType;
@@ -32,6 +34,8 @@ public class GunManager : MonoBehaviour
     float shotTime;
     [BoxGroup("Gun")]
     public int ammo;
+    [BoxGroup("Gun")]
+    public bool hasSideGrip;
     
     [BoxGroup("Settings")]
     public bool toggleAim;
@@ -56,6 +60,7 @@ public class GunManager : MonoBehaviour
     {
         shotTime -= Time.deltaTime;
         anim.SetLayerWeight(gunItem.animLayer, 1);
+    
         if(!playerMovement.disabled){
             
             if(inputManager.reloadValue){
@@ -125,6 +130,8 @@ public class GunManager : MonoBehaviour
 
                 inputManager.changeFireModeValue = false;
             }
+            
+            anim.SetBool("SideGrip", hasSideGrip);
             anim.SetBool("Aiming", aiming);
         }
     }

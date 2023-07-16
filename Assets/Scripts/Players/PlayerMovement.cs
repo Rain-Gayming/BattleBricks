@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [BoxGroup("References")]
     public Transform lookPoint;
     [BoxGroup("References")]
+    public Animator anim;
+    [BoxGroup("References")]
     public bool disabled;
 
     
@@ -118,7 +120,19 @@ public class PlayerMovement : MonoBehaviour
 
         SpeedControl();
 #endregion
+
+            if(inputManager.walkValue != Vector2.zero){
+                anim.SetBool("Walking", true);
+            }else{
+                anim.SetBool("Walking", false);
+            }
+            if(currentMoveType == MoveType.sprinting && inputManager.walkValue != Vector2.zero){
+                anim.SetBool("Sprinting", true);
+            }else{
+                anim.SetBool("Sprinting", false);
+            }
         }
+
     
     }
 
