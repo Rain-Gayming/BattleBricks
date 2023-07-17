@@ -19,6 +19,16 @@ public class GunItem : ItemObject
     public float reloadTime;
     [BoxGroup("Gun Info")]
     public List<FireType> fireTypes;
+    [BoxGroup("Gun Info/Attachments")]
+    public AttachmentPack scopeAttachmentPack;
+    [BoxGroup("Gun Info/Attachments")]
+    public AttachmentPack barrelAttachmentPack;
+    [BoxGroup("Gun Info/Attachments")]
+    public AttachmentPack gripAttachmentPack;
+    [BoxGroup("Gun Info/Attachments")]
+    public AttachmentPack frontGripAttachmentPack;
+    [BoxGroup("Gun Info/Attachments")]
+    public AttachmentPack sideAttachmentPack;
     [BoxGroup("Gun Info/Audio")]
     public AudioPack shootPack;
     [BoxGroup("Gun Info/Animation")]

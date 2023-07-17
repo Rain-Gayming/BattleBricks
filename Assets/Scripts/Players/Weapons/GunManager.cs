@@ -37,6 +37,43 @@ public class GunManager : MonoBehaviour
     [BoxGroup("Gun")]
     public bool hasSideGrip;
     
+    [BoxGroup("Attachments")]
+    [BoxGroup("Attachments/Scope")]
+    public AttachmentItem scopeAttachment;
+    [BoxGroup("Attachments/Scope")]
+    public List<AttachmentObject> scopeAttachments;
+    
+    [BoxGroup("Attachments/Scope")]
+
+    public AttachmentItem previousScopeAttachement;
+    [BoxGroup("Attachments/Barrel")]
+    public AttachmentItem barrelAttachment;
+    [BoxGroup("Attachments/Barrel")]
+    public List<AttachmentObject> barrelAttachments;
+    [BoxGroup("Attachments/Barrel")]
+    public AttachmentItem previousBarrelAttachement;
+
+    [BoxGroup("Attachments/Grip")]
+    public AttachmentItem gripAttachment;
+    [BoxGroup("Attachments/Grip")]
+    public List<AttachmentObject> gripAttachments;
+    [BoxGroup("Attachments/Grip")]
+    public AttachmentItem previousGripAttachement;
+    
+    [BoxGroup("Attachments/Front Grip")]
+    public AttachmentItem frontGripAttachment;
+    [BoxGroup("Attachments/Front Grip")]
+    public List<AttachmentObject> frontGripAttachments;
+    [BoxGroup("Attachments/Front Grip")]
+    public AttachmentItem previousFrontGripAttachement;
+
+    [BoxGroup("Attachments/Side")]
+    public AttachmentItem sideAttachment;
+    [BoxGroup("Attachments/Side")]
+    public List<AttachmentObject> sideAttachments;
+    [BoxGroup("Attachments/Side")]
+    public AttachmentItem previousSideAttachement;
+    
     [BoxGroup("Settings")]
     public bool toggleAim;
 
@@ -128,6 +165,50 @@ public class GunManager : MonoBehaviour
                     break;
                 }
 
+                //Changes attachments if theyre changed
+                if(previousBarrelAttachement != barrelAttachment || previousFrontGripAttachement != frontGripAttachment || previousGripAttachement != gripAttachment || previousScopeAttachement != scopeAttachment || previousSideAttachement != sideAttachment){
+                    for (int i = 0; i < barrelAttachments.Count; i++)
+                    {
+                        if(barrelAttachments[i].attachmentItem == barrelAttachment){
+                            barrelAttachments[i].attachmentObject.SetActive(true);
+                        }else{
+                            barrelAttachments[i].attachmentObject.SetActive(false);
+                        }
+                    }
+                    for (int i = 0; i < frontGripAttachments.Count; i++)
+                    {
+                        if(frontGripAttachments[i].attachmentItem == frontGripAttachment){
+                            frontGripAttachments[i].attachmentObject.SetActive(true);
+                        }else{
+                            frontGripAttachments[i].attachmentObject.SetActive(false);
+                        }
+                    }
+                    for (int i = 0; i < gripAttachments.Count; i++)
+                    {
+                        if(gripAttachments[i].attachmentItem == gripAttachment){
+                            gripAttachments[i].attachmentObject.SetActive(true);
+                        }else{
+                            gripAttachments[i].attachmentObject.SetActive(false);
+                        }
+                    }
+                    for (int i = 0; i < scopeAttachments.Count; i++)
+                    {
+                        if(scopeAttachments[i].attachmentItem == scopeAttachment){
+                            scopeAttachments[i].attachmentObject.SetActive(true);
+                        }else{
+                            scopeAttachments[i].attachmentObject.SetActive(false);
+                        }
+                    }
+                    for (int i = 0; i < sideAttachments.Count; i++)
+                    {
+                        if(sideAttachments[i].attachmentItem == sideAttachment){
+                            sideAttachments[i].attachmentObject.SetActive(true);
+                            GetComponent<Laser>().attachmentItem = sideAttachment;
+                        }else{
+                            sideAttachments[i].attachmentObject.SetActive(false);
+                        }
+                    }
+                }
                 inputManager.changeFireModeValue = false;
             }
             
@@ -152,7 +233,6 @@ public class GunManager : MonoBehaviour
         yield return new WaitForSeconds(gunItem.burstRate);
         SingleShot();
     }
-
     public void SingleShot()
     {
         inputManager.shootValue = false;

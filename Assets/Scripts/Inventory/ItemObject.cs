@@ -16,9 +16,13 @@ public class ItemObject : ScriptableObject
     [BoxGroup("References")]
     [HideInInspector]public bool isBase;
     [BoxGroup("References")]
+    public ItemObject baseItem;
+    [BoxGroup("References")]
     [ShowIf("isBase")] public WeaponItem weaponReference;
     [BoxGroup("References")]
     [ShowIf("isBase")]  public GunItem gunReference;
     [BoxGroup("References")]
     [ShowIf("isBase")] public BulletItem bulletReference;
+    [BoxGroup("References")]
+    [ShowIf("isBase")] public AttachmentItem attachmentReference;
 }

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b82327d8586b5949b00814eecd85663, type: 3}
-  m_Name: igun_M4A1
+  m_Name: iASide_Flashlight
   m_EditorClassIdentifier: 
-  itemName: M4A1
+  itemName: Flashlight
   itemDescription: 
   itemIcon: {fileID: 0}
   isBase: 1
-  baseItem: {fileID: 11400000}
+  baseItem: {fileID: 0}
   weaponReference: {fileID: 0}
-  gunReference: {fileID: 11400000, guid: 0a9337b876abb6748bc6170d765ef115, type: 2}
+  gunReference: {fileID: 0}
   bulletReference: {fileID: 0}
-  attachmentReference: {fileID: 0}
+  attachmentReference: {fileID: 11400000, guid: 82864db892fd7ae44adb142faf708ed1,
+    type: 2}
