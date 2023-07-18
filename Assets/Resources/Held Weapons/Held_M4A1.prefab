@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 14382082}
   - component: {fileID: 14382081}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Side Grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,11 +28,12 @@ Transform:
   m_GameObject: {fileID: 14382079}
   m_LocalRotation: {x: -0, y: -0, z: -0.2588186, w: 0.965926}
   m_LocalPosition: {x: -0.058800004, y: -0.0020000138, z: 0.24000002}
-  m_LocalScale: {x: 0.039464157, y: 0.16539693, z: 0.03946416}
+  m_LocalScale: {x: 0.039464157, y: 0.16539693, z: 0.03946417}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 558962442086655102}
-  m_RootOrder: 9
+  m_Children:
+  - {fileID: 2284159545246198619}
+  m_Father: {fileID: 2023572851220917531}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
 --- !u!33 &14382083
 MeshFilter:
@@ -196,7 +197,6 @@ Transform:
   - {fileID: 1295488460525416282}
   - {fileID: 7799025460363327737}
   - {fileID: 7581498848904454962}
-  - {fileID: 14382080}
   m_Father: {fileID: 7606811552050024347}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -291,6 +291,37 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000000007450581, y: 0.026563708, z: 0.81594825}
     m_Extent: {x: 0.013903738, y: 0.029875435, z: 0.08884221}
   m_DirtyAABB: 0
+--- !u!1 &588713166792678671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2284159545246198619}
+  m_Layer: 0
+  m_Name: Side Grip Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2284159545246198619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588713166792678671}
+  m_LocalRotation: {x: -0.018829495, y: -0.65224165, z: -0.61517763, w: 0.44247347}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 14382080}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -55, y: -75, z: -65}
 --- !u!1 &1290043734034472634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1212,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3175288658860234622}
+  - {fileID: 2023572851220917531}
   m_Father: {fileID: 7606811552050024347}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1459,6 +1491,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 558962442086655102}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6059059258349602194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2023572851220917531}
+  m_Layer: 0
+  m_Name: Front Grips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2023572851220917531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059059258349602194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 14382080}
+  m_Father: {fileID: 2988751752865776314}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6315478622937391495
 GameObject:

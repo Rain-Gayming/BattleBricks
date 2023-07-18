@@ -72,14 +72,6 @@ public class ScriptableCreator : OdinMenuEditorWindow
 
     public class CreateNewItem
     {
-        public enum ItemType
-        {
-            item,
-            weapon,
-            gun,
-            bullet,
-            attachment
-        }
 
 #region  items
         [HideInEditorMode] public ItemObject ItemObject;
@@ -160,7 +152,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
             ItemObject.baseItem = ItemObject;
             switch (itemType)
             {
-                case ItemType.weapon:
+                case ItemType.melee:
                     weaponItem = ScriptableObject.CreateInstance<WeaponItem>();
                     ItemObject.weaponReference = weaponItem;
                     weaponItem.itemName = itemName;
@@ -198,11 +190,13 @@ public class ScriptableCreator : OdinMenuEditorWindow
             ItemObject.itemName = itemName;
             ItemObject.itemDescription = itemDescription;
             ItemObject.itemIcon = itemIcon;
+            ItemObject.itemType = itemType;
             switch (itemType)
             {
-                case ItemType.weapon:
+                case ItemType.melee:
                     weaponItem = ScriptableObject.CreateInstance<WeaponItem>();
                     ItemObject.weaponReference = weaponItem;
+                    weaponItem.itemType = itemType;
                     weaponItem.itemName = itemName;
                     weaponItem.itemDescription = itemDescription;
                     weaponItem.baseItem = ItemObject;
@@ -210,6 +204,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
                 case ItemType.gun:
                     gunItem = ScriptableObject.CreateInstance<GunItem>();
                     ItemObject.gunReference = gunItem;
+                    gunItem.itemType = itemType;
                     gunItem.itemName = itemName;
                     gunItem.itemDescription = itemDescription;
 
@@ -230,6 +225,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
                 case ItemType.bullet:
                     bulletItem = ScriptableObject.CreateInstance<BulletItem>();
                     ItemObject.bulletReference = bulletItem;
+                    bulletItem.itemType = itemType;
                     bulletItem.itemName = itemName;
                     bulletItem.itemDescription = itemDescription;
                     bulletItem.baseItem = ItemObject;
@@ -242,6 +238,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
                 case ItemType.attachment:
                     attachmentItem = ScriptableObject.CreateInstance<AttachmentItem>();
                     ItemObject.attachmentReference = attachmentItem;
+                    attachmentItem.itemType = itemType;
                     attachmentItem.itemName = itemName;
                     attachmentItem.itemDescription = itemDescription;
                     attachmentItem.baseItem = ItemObject;

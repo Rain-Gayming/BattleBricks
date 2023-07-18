@@ -52,7 +52,7 @@ public class PlayerController : HealthManager
             bodyModel.SetActive(false);
             info = UserManager.instance.userInfo;
             view.Owner.NickName = info.displayName;
-            grenadePoint = GetComponentInChildren<GrenadePoint>().transform;
+            //grenadePoint = GetComponentInChildren<GrenadePoint>().transform;
         }else{
             Destroy(handModel);
             bodyModel.SetActive(true);

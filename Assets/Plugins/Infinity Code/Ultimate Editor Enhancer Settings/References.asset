@@ -514,12 +514,14 @@ MonoBehaviour:
     icon: VideoPlayer Icon
     color: {r: 0.5764706, g: 0.43921572, b: 0.8588236, a: 1}
   _sceneHistory:
+  - name: Animation Testing
+    path: Assets/Scenes/Animation Testing.unity
+  - name: Log In
+    path: Assets/Scenes/Log In.unity
   - name: World
     path: Assets/Scenes/World.unity
   - name: Main Menu
     path: Assets/Scenes/Main Menu.unity
-  - name: Log In
-    path: Assets/Scenes/Log In.unity
   - name: Login
     path: Assets/Scenes/Login.unity
   - name: SampleScene

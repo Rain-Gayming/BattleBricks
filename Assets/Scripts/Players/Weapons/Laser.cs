@@ -27,7 +27,7 @@ public class Laser : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(laserPoint.position, laserPoint.forward, out hit, Mathf.Infinity)){
             laser.position = hit.point + hit.normal * 0.01f;
-            laser.rotation = Quaternion.LookRotation(hit.normal, Vector3.right);
+            laser.rotation = Quaternion.LookRotation(hit.normal, Vector3.right  );
         }
     }
 }

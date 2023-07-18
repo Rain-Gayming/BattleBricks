@@ -17,7 +17,8 @@ MonoBehaviour:
     The M4A1 is an automatic variant of the M4 carbine, which is limited to semi-automatic
     and 3-round burst fire modes. The M4A1 was designed from the M4 and was adopted
     by the US Army in 2012.
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 2fb83ea89df639b43a22d707d3c22af1, type: 3}
+  itemType: 7
   isBase: 0
   baseItem: {fileID: 11400000, guid: b01ee343117a3444f8be4f00e682e91e, type: 2}
   weaponReference: {fileID: 0}
