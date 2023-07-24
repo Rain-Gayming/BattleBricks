@@ -36,6 +36,6 @@ public class HealthManager : MonoBehaviour
 
     public virtual void Die()
     {
-
+        Debug.Log("I died " + name);
     }
 }

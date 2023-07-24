@@ -70,8 +70,8 @@ public class PlayerCamera : MonoBehaviour
                         uiController.uiObjects[i].GetComponent<InteractionUI>().selected = false;
                     }
                     uiController.uiObjects[selectionIndex].GetComponent<InteractionUI>().selected = true;
-                    if(inputManager.interact){
-                        inputManager.interact = false;  
+                    if(inputManager.interactValue){
+                        inputManager.interactValue = false;  
                         interactionHit.transform.GetComponent<Interactable>().Interact(selectionIndex);
                         if(!interactionHit.transform.GetComponent<Interactable>()){
                             uiController.ClearInteractions();

@@ -24,6 +24,23 @@ public class ScriptableCreator : OdinMenuEditorWindow
         createNewItem = new CreateNewItem();
         tree.Add("Create New Item", createNewItem);
         tree.AddAllAssetsAtPath("Items", "Assets/ScriptableObjects/Items/Items", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Guns", "Assets/ScriptableObjects/Items/ItemReferences/Guns", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Armour/Back", "Assets/ScriptableObjects/Items/ItemReferences/Armour/Back", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Armour/Chest", "Assets/ScriptableObjects/Items/ItemReferences/Armour/Chest", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Armour/Feet", "Assets/ScriptableObjects/Items/ItemReferences/Armour/Feet", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Armour/Head", "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Armour/Legs", "Assets/ScriptableObjects/Items/ItemReferences/Armour/Legs", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Armour/Wrist", "Assets/ScriptableObjects/Items/ItemReferences/Armour/Wrist", typeof(ItemObject));
+
+        tree.AddAllAssetsAtPath("Items/References/Attachments/Barrels", "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Barrels", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Attachments/Front Grips", "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Front Grips", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Attachments/Grips", "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Grips", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Attachments/Scopes", "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Scopes", typeof(ItemObject));
+        tree.AddAllAssetsAtPath("Items/References/Attachments/Side", "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Side", typeof(ItemObject));
+
+        tree.AddAllAssetsAtPath("Items/References/Bullets", "Assets/ScriptableObjects/Items/ItemReferences/Bullets", typeof(ItemObject));
+
+        
         tree.AddAllAssetsAtPath("Weapons", "Assets/ScriptableObjects/Items/Weapons", typeof(WeaponItem));
         tree.AddAllAssetsAtPath("Guns", "Assets/ScriptableObjects/Items/Guns", typeof(GunItem));
         tree.AddAllAssetsAtPath("Bullets", "Assets/ScriptableObjects/Items/Bullets", typeof(BulletItem));
@@ -32,6 +49,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
         tree.AddAllAssetsAtPath("Attachments/Grips", "Assets/ScriptableObjects/Items/Attachments/Grips", typeof(AttachmentItem));
         tree.AddAllAssetsAtPath("Attachments/Scopes", "Assets/ScriptableObjects/Items/Attachments/Scopes", typeof(AttachmentItem));
         tree.AddAllAssetsAtPath("Attachments/Side", "Assets/ScriptableObjects/Items/Attachments/Side", typeof(AttachmentItem));
+        tree.AddAllAssetsAtPath("Armour", "Assets/ScriptableObjects/Items/Armour", typeof(ArmourItem));
 
         return tree;
     }
@@ -72,13 +90,15 @@ public class ScriptableCreator : OdinMenuEditorWindow
 
     public class CreateNewItem
     {
-
+        public ItemDatabase itemDatabase;
 #region  items
-        [HideInEditorMode] public ItemObject ItemObject;
+        [HideInEditorMode] public ItemObject itemObject;
         [HideInEditorMode] public WeaponItem weaponItem;
         [HideInEditorMode] public GunItem gunItem;
         [HideInEditorMode] public BulletItem bulletItem;
         [HideInEditorMode] public AttachmentItem attachmentItem;
+        [HideInEditorMode] public ArmourItem armourItem;
+        [HideInEditorMode] public GrenadeItem grenadeItem;
 #endregion
         
         [BoxGroup("Item")]
@@ -86,6 +106,8 @@ public class ScriptableCreator : OdinMenuEditorWindow
         [BoxGroup("Item")]
         [TextArea(5, 10)]
         public string itemDescription;
+        [BoxGroup("Item")]
+        public bool equippable;
 
         
         [HorizontalGroup("Item/Display Data")]
@@ -124,6 +146,23 @@ public class ScriptableCreator : OdinMenuEditorWindow
         [BoxGroup("Gun Info/Audio")] [ShowIf("itemType", ItemType.gun)]
         public AttachmentPack sideAttachmentPack;
 
+        [BoxGroup("Gun Info/Sway")][ShowIf("itemType", ItemType.gun)]
+        public float weight;
+
+        [BoxGroup("Gun Info/Recoil")][ShowIf("itemType", ItemType.gun)]
+        public float recoilX;
+        [BoxGroup("Gun Info/Recoil")][ShowIf("itemType", ItemType.gun)]
+        public float recoilY;
+        [BoxGroup("Gun Info/Recoil")][ShowIf("itemType", ItemType.gun)]
+        public float recoilZ;
+        
+        [BoxGroup("Gun Info/Aiming Recoil")][ShowIf("itemType", ItemType.gun)]
+        public float aimRecoilX;
+        [BoxGroup("Gun Info/Aiming Recoil")][ShowIf("itemType", ItemType.gun)]
+        public float aimRecoilY;
+        [BoxGroup("Gun Info/Aiming Recoil")][ShowIf("itemType", ItemType.gun)]
+        public float aimRecoilZ;
+
 #endregion
 
 #region Bullet Info
@@ -143,41 +182,69 @@ public class ScriptableCreator : OdinMenuEditorWindow
         [BoxGroup("Attachment Info")] [ShowIf("itemType", ItemType.attachment)]
         public AttachmentPack attachmentPack;
 #endregion
+
+#region  Armour Item
+
+        [BoxGroup("Armour Info")] [ShowIf("itemType", ItemType.armour)]
+        public int armourValue;
+        [BoxGroup("Armour Info")] [ShowIf("itemType", ItemType.armour)]
+        public int radiationProtection;
+        [BoxGroup("Armour Info")] [ShowIf("itemType", ItemType.armour)]
+        public int extraSlots;
+        [BoxGroup("Armour Info")] [ShowIf("itemType", ItemType.armour)]
+        public ArmourType armourType;
+        
+
+#endregion
+
+        [BoxGroup("Grenade Info")] [ShowIf("itemType", ItemType.grenade)]
+        public int grenadeDamage;
+        [BoxGroup("Grenade Info")] [ShowIf("itemType", ItemType.grenade)]
+        public int grenadeVelocity;
+        [BoxGroup("Grenade Info")] [ShowIf("itemType", ItemType.grenade)]
+        public int grenadeFragments;
+
+#region  Grenade Item
+
+
+#endregion
         public CreateNewItem()
         {
-            ItemObject = ScriptableObject.CreateInstance<ItemObject>();
-            ItemObject.isBase = true;
-            ItemObject.itemName = itemName;
-            ItemObject.itemDescription = itemDescription;
-            ItemObject.baseItem = ItemObject;
+            itemDatabase = AssetDatabase.LoadAssetAtPath("Assets/ScriptableObjects/Items/Item Database.asset", typeof(ItemDatabase)) as ItemDatabase;
+            
+            itemObject = ScriptableObject.CreateInstance<ItemObject>();
+            itemObject.isBase = true;
+            itemObject.itemName = itemName;
+            itemObject.itemDescription = itemDescription;
+            itemObject.baseItem = itemObject;
             switch (itemType)
             {
                 case ItemType.melee:
                     weaponItem = ScriptableObject.CreateInstance<WeaponItem>();
-                    ItemObject.weaponReference = weaponItem;
+                    itemObject.weaponReference = weaponItem;
                     weaponItem.itemName = itemName;
                     weaponItem.itemDescription = itemDescription;
-                    weaponItem.baseItem = ItemObject;
+                    weaponItem.baseItem = itemObject;
                 break;
                 case ItemType.gun:
                     gunItem = ScriptableObject.CreateInstance<GunItem>();
-                    ItemObject.gunReference = gunItem;
+                    itemObject.gunReference = gunItem;
                     gunItem.itemName = itemName;
                     gunItem.itemDescription = itemDescription;
-                    gunItem.baseItem = ItemObject;
+                    gunItem.baseItem = itemObject;
                 break;
                 case ItemType.bullet:
                     bulletItem = ScriptableObject.CreateInstance<BulletItem>();
-                    ItemObject.bulletReference = bulletItem;
+                    itemObject.bulletReference = bulletItem;
                     bulletItem.itemName = itemName;
                     bulletItem.itemDescription = itemDescription;
-                    bulletItem.baseItem = ItemObject;
+                    bulletItem.baseItem = itemObject;
                 break;
                 case ItemType.attachment:
                     attachmentItem = ScriptableObject.CreateInstance<AttachmentItem>();
-                    ItemObject.attachmentReference = attachmentItem;
+                    itemObject.attachmentReference = attachmentItem;
                     attachmentItem.attachmentType = attachmentType;
-                    attachmentItem.baseItem = ItemObject;
+                    attachmentItem.baseItem = itemObject;
                 break;
             }
         }
@@ -185,25 +252,29 @@ public class ScriptableCreator : OdinMenuEditorWindow
         [Button("Make New Item")]
         public void CreateNewItemData()
         {
-            ItemObject = ScriptableObject.CreateInstance<ItemObject>();
-            ItemObject.isBase = true;
-            ItemObject.itemName = itemName;
-            ItemObject.itemDescription = itemDescription;
-            ItemObject.itemIcon = itemIcon;
-            ItemObject.itemType = itemType;
+            itemObject = ScriptableObject.CreateInstance<ItemObject>();
+            itemObject.isBase = true;
+            itemObject.itemName = itemName;
+            itemObject.itemDescription = itemDescription;
+            itemObject.itemIcon = itemIcon;
+            itemObject.itemType = itemType;
+            itemObject.equippable = equippable;
+
             switch (itemType)
             {
                 case ItemType.melee:
                     weaponItem = ScriptableObject.CreateInstance<WeaponItem>();
-                    ItemObject.weaponReference = weaponItem;
+                    itemObject.weaponReference = weaponItem;
                     weaponItem.itemType = itemType;
                     weaponItem.itemName = itemName;
                     weaponItem.itemDescription = itemDescription;
-                    weaponItem.baseItem = ItemObject;
+                    weaponItem.baseItem = itemObject;
+
+                    itemDatabase.items.Add(weaponItem);
                 break;
                 case ItemType.gun:
                     gunItem = ScriptableObject.CreateInstance<GunItem>();
-                    ItemObject.gunReference = gunItem;
+                    itemObject.gunReference = gunItem;
                     gunItem.itemType = itemType;
                     gunItem.itemName = itemName;
                     gunItem.itemDescription = itemDescription;
@@ -214,71 +285,145 @@ public class ScriptableCreator : OdinMenuEditorWindow
                     gunItem.burstRate = burstRate;
                     gunItem.range = range;
                     gunItem.shootPack = shootPack;
-                    gunItem.baseItem = ItemObject;
+                    gunItem.baseItem = itemObject;
                     
                     gunItem.scopeAttachmentPack = scopeAttachmentPack;
                     gunItem.barrelAttachmentPack = barrelAttachmentPack;
                     gunItem.gripAttachmentPack = gripAttachmentPack;
                     gunItem.frontGripAttachmentPack = frontGripAttachmentPack;
                     gunItem.sideAttachmentPack = sideAttachmentPack;
+
+                    gunItem.weight = weight;
+
+                    gunItem.recoilX = recoilX;
+                    gunItem.recoilY = recoilY;
+                    gunItem.recoilZ = recoilZ;
+
+                    gunItem.aimRecoilX = aimRecoilX;
+                    gunItem.aimRecoilY = aimRecoilY;
+                    gunItem.aimRecoilZ = aimRecoilZ;
+
+                    itemDatabase.items.Add(gunItem);
                 break;
                 case ItemType.bullet:
                     bulletItem = ScriptableObject.CreateInstance<BulletItem>();
-                    ItemObject.bulletReference = bulletItem;
+                    itemObject.bulletReference = bulletItem;
                     bulletItem.itemType = itemType;
                     bulletItem.itemName = itemName;
                     bulletItem.itemDescription = itemDescription;
-                    bulletItem.baseItem = ItemObject;
+                    bulletItem.baseItem = itemObject;
 
                     bulletItem.damage = damage;
                     bulletItem.caliber = caliber;
                     bulletItem.velocity = velocity;
-                    bulletItem.baseItem = ItemObject;
+                    bulletItem.baseItem = itemObject;
+                    
+                    itemDatabase.items.Add(bulletItem);
                 break;
                 case ItemType.attachment:
                     attachmentItem = ScriptableObject.CreateInstance<AttachmentItem>();
-                    ItemObject.attachmentReference = attachmentItem;
+                    itemObject.attachmentReference = attachmentItem;
                     attachmentItem.itemType = itemType;
                     attachmentItem.itemName = itemName;
                     attachmentItem.itemDescription = itemDescription;
-                    attachmentItem.baseItem = ItemObject;
+                    attachmentItem.baseItem = itemObject;
                     
                     attachmentItem.attachmentType = attachmentType;
-                    attachmentItem.baseItem = ItemObject;
+                    attachmentItem.baseItem = itemObject;
                     attachmentPack.attachments.Add(attachmentItem);
+                    
+                    itemDatabase.items.Add(attachmentItem);
+                break;
+                case ItemType.armour:
+                    armourItem = ScriptableObject.CreateInstance<ArmourItem>();
+                    itemObject.armourReference = armourItem;
+
+                    armourItem.itemType = itemType;
+                    armourItem.itemName = itemName;
+                    armourItem.itemDescription = itemDescription;
+                    armourItem.baseItem = itemObject;
+
+                    armourItem.armourValue = armourValue;
+                    armourItem.radiationProtection = radiationProtection;
+                    armourItem.extraSlots = extraSlots;
+                break; 
+                case ItemType.grenade:
+                    grenadeItem = ScriptableObject.CreateInstance<GrenadeItem>();
+                    itemObject.grenadeReference = grenadeItem;
+
+                    grenadeItem.damage = grenadeDamage;
+                    grenadeItem.fragments = grenadeFragments;
+                    grenadeItem.velocity = grenadeVelocity;
                 break;
             }
 
-            if(!attachmentItem)
-                AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/i" + itemType + "_" + itemName + ".asset");
-            if(weaponItem)
-                AssetDatabase.CreateAsset(weaponItem, "Assets/ScriptableObjects/Items/Weapons/w_" + itemName + ".asset");
-            if(gunItem)
-                AssetDatabase.CreateAsset(gunItem, "Assets/ScriptableObjects/Items/Guns/g_" + itemName + ".asset");
-            if(bulletItem)
-                AssetDatabase.CreateAsset(bulletItem, "Assets/ScriptableObjects/Items/Bullets/b_" + itemName + ".asset");
+            if(weaponItem){
+                AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Weapons/ItemRefWeapon_" + itemName + ".asset");
+                AssetDatabase.CreateAsset(weaponItem, "Assets/ScriptableObjects/Items/Weapons/Weapon_" + itemName + ".asset");
+            }
+            if(gunItem){
+                AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Guns/ItemRefGun_" + itemName + ".asset");
+                AssetDatabase.CreateAsset(gunItem, "Assets/ScriptableObjects/Items/Guns/Gun_" + itemName + ".asset");
+            }
+            if(bulletItem){
+                AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Bullets/ItemRefBullet_" + itemName + ".asset");
+                AssetDatabase.CreateAsset(bulletItem, "Assets/ScriptableObjects/Items/Bullets/Bullet_" + itemName + ".asset");
+            }
+            if(grenadeItem){
+                AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Grenade/ItemRefGrenade_" + itemName + ".asset");
+                AssetDatabase.CreateAsset(grenadeItem, "Assets/ScriptableObjects/Items/Grenades/Grenade_" + itemName + ".asset");
+            }
             if(attachmentItem){
                 switch (attachmentType)
                 {
                     case AttachmentType.scope:
-                        AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/iAScope"  + "_" + itemName + ".asset");
-                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Scopes/AScope_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Scope/ItemRefAttachmentScope_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Scopes/AttachmentScope_" + itemName + ".asset");
                     break;
                     case AttachmentType.frontGrip:
-                        AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/iAFrontGrip_"  + "_" + itemName + ".asset");
-                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Front Grips/AFrontGrip_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Attachments/FrontGrip/ItemRefAttachmentFrontGrip_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Front Grips/AttachmentFrontGrip_" + itemName + ".asset");
                     break;
                     case AttachmentType.grip:
-                        AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/iAGrip_"  + "_" + itemName + ".asset");
-                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Grips/AGrip_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Grip/ItemRefAttachmentGrip_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Grips/AttachmentGrip_" + itemName + ".asset");
                     break;
                     case AttachmentType.side:
-                        AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/iASide_"  + "_" + itemName + ".asset");
-                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Sides/ASide_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Side/ItemRefAttachmentSide_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Sides/AttachmentSide_" + itemName + ".asset");
                     break;
                     case AttachmentType.barrel:
-                        AssetDatabase.CreateAsset(ItemObject, "Assets/ScriptableObjects/Items/Items/iABarrel"  + "_" + itemName + ".asset");
-                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Barrels/ABarrel" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Attachments/Barrels/ItemRefAttachmentBarrel_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Attachments/Barrels/AttachmentBarrel_" + itemName + ".asset");
+                    break;
+                }
+            }
+            if(armourItem){
+                switch (armourType)
+                {
+                    case ArmourType.head:
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head/ItemRefHead_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Armour/Head/AHead_" + itemName + ".asset");
+                    break;
+                    case ArmourType.chest:
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head/ItemRefChest_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Armour/Chest/ArmourChest_" + itemName + ".asset");
+                    break;
+                    case ArmourType.back:
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head/ItemRefBack_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Armour/Back/ArmourBack_" + itemName + ".asset");
+                    break;
+                    case ArmourType.legs:
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head/ItemRefLegs_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Armour/Legs/ArmourLegs_" + itemName + ".asset");
+                    break;
+                    case ArmourType.wrist:
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head/ItemRefWrist_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Armour/Wrist/ArmourWrist_" + itemName + ".asset");
+                    break;
+                    case ArmourType.feet:
+                        AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Armour/Head/ItemRefFeet_" + itemName + ".asset");
+                        AssetDatabase.CreateAsset(attachmentItem, "Assets/ScriptableObjects/Items/Armour/Feet/ArmourFeet_" + itemName + ".asset");
                     break;
                 }
             }
@@ -286,6 +431,9 @@ public class ScriptableCreator : OdinMenuEditorWindow
 
             itemName = null;
             itemDescription = null;
+
+            itemDatabase.items.Add(itemObject);
+            itemDatabase.SetIDs();
         }
     }
 }

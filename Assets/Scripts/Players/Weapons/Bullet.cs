@@ -11,4 +11,12 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = transform.forward * bulletItem.velocity;  
     }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.GetComponent<HealthManager>()){
+            other.GetComponent<HealthManager>().TakeDamage(bulletItem.damage); 
+        }
+        Destroy(gameObject);
+    }
 }

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c99e868cd9ed841bbfe5f0aa5b8bdb, type: 3}
+  m_Name: Gun_AAC Honey Badger
+  m_EditorClassIdentifier: 
+  itemName: AAC Hoeny Badger
+  itemDescription: 
+  itemIcon: {fileID: 0}
+  itemType: 7
+  itemID: 0
+  isBase: 0
+  baseItem: {fileID: 11400000, guid: 9feb1fe0013438f4a9f25f51fe56f7e8, type: 2}
+  weaponReference: {fileID: 0}
+  gunReference: {fileID: 0}
+  bulletReference: {fileID: 0}
+  attachmentReference: {fileID: 0}
+  fireRateAuto: 0.15
+  fireRateSemi: 0.1
+  burstRate: 0
+  range: 900
+  maxAmmo: 25
+  reloadTime: 3
+  fireTypes: 0000000002000000
+  scopeAttachmentPack: {fileID: 11400000, guid: db94a20665b65004e9993f10ecfb3e19,
+    type: 2}
+  barrelAttachmentPack: {fileID: 11400000, guid: 67e1a26d64806984ebe1dc52438aa597,
+    type: 2}
+  gripAttachmentPack: {fileID: 11400000, guid: 5f90ca927c133d9468f659e0a1edf645, type: 2}
+  frontGripAttachmentPack: {fileID: 11400000, guid: 5e66538712d5ad34bab4713d94f5099e,
+    type: 2}
+  sideAttachmentPack: {fileID: 11400000, guid: ce69ed50522e82146a06803548e76b8a, type: 2}
+  shootPack: {fileID: 11400000, guid: 7ca315c0a34f80344be4174f58107c5a, type: 2}
+  idleAnim: {fileID: 0}
+  sideGripAnim: {fileID: 0}
+  animLayer: 0
+  weight: 0.05
+  recoilX: -3
+  recoilY: -2
+  recoilZ: 0.4
+  aimRecoilX: -2
+  aimRecoilY: -1.5
+  aimRecoilZ: 0.35

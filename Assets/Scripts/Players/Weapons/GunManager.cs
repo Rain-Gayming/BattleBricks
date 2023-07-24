@@ -9,21 +9,30 @@ using UnityEngine.Audio;
 public class GunManager : MonoBehaviour
 {
     [BoxGroup("References")]
+    public InputManager inputManager;
+    [BoxGroup("References/Player")]
+    public PlayerController playerController;
+    [BoxGroup("References/Player")]
+    public PlayerMovement playerMovement;
+    [BoxGroup("References/Player")]
+    public PlayerUIController playerUIController;
+    
+    [BoxGroup("References/Animations")]
+    public PlayerAnimator playerAnimator;
+    [BoxGroup("References/Animations")]
+    public AnimatorOverrideController overrideController;
+    [BoxGroup("References/Animations")]
     public Animator anim;
     [BoxGroup("References")]
-    public PlayerController playerController;
-    [BoxGroup("References")]
-    public PlayerMovement playerMovement;
-    [BoxGroup("References")]
     public PhotonView view;
-    [BoxGroup("References")]
+    [BoxGroup("References/Weapons")]
     public GunItem gunItem;
-    [BoxGroup("References")]
+    [BoxGroup("References/Weapons")]
     public BulletItem bulletItem;
-    [BoxGroup("References")]
-    public InputManager inputManager;
-    [BoxGroup("References")]
-    public AnimatorOverrideController overrideController;
+    [BoxGroup("References/Weapons")]
+    public WeaponSway weaponSway;
+    [BoxGroup("References/Weapons")]
+    public WeaponRecoil weaponRecoil;
 
     [BoxGroup("Gun")]
     public FireType currentFireType;
@@ -36,7 +45,13 @@ public class GunManager : MonoBehaviour
     public int ammo;
     [BoxGroup("Gun")]
     public bool hasSideGrip;
-    
+    [BoxGroup("Gun")]
+    public Transform defaultBarrel;
+    [BoxGroup("Gun")]
+    public Transform magPoint;
+    [BoxGroup("Gun")]
+    public Transform gripPoint;
+
     [BoxGroup("Attachments")]
     [BoxGroup("Attachments/Scope")]
     public AttachmentItem scopeAttachment;
@@ -76,19 +91,46 @@ public class GunManager : MonoBehaviour
     
     [BoxGroup("Settings")]
     public bool toggleAim;
+    bool canShoot = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        canShoot = true;
         view = GetComponentInParent<PhotonView>();
         if(!view.IsMine){
+            weaponSway = GetComponentInParent<WeaponSway>();
+            weaponRecoil = GetComponentInParent<WeaponRecoil>();
+            Destroy(weaponSway);
+            Destroy(weaponRecoil);
             Destroy(this);
         }else{
             playerController = GetComponentInParent<PlayerController>();
             playerMovement = GetComponentInParent<PlayerMovement>();
-            anim = GetComponentInParent<Animator>();
+            playerUIController = GetComponentInParent<PlayerUIController>();
+
             inputManager = GetComponentInParent<InputManager>();
+            anim = GetComponentInParent<Animator>();
+
+            weaponSway = GetComponentInParent<WeaponSway>();
+            weaponSway.currentGun = gunItem;
+
+            weaponRecoil = GetComponentInParent<WeaponRecoil>();
+            weaponRecoil.currentGun = gunItem;
             ammo = gunItem.maxAmmo;
+
+            if(gripAttachment){
+                for (int i = 0; i < gripAttachments.Count; i++)
+                {
+                    if(gripAttachments[i].attachmentItem == gripAttachment){
+                        //playerAnimator.ChangeLeftPoint(gripAttachments[i].attachmentObject.transform);
+                    }
+                }
+            }else{
+                //playerAnimator.ChangeLeftPoint(defaultBarrel);
+            }
+
+            //playerAnimator.ChangeRightPoint(gripPoint);
         }
     }
 
@@ -96,15 +138,13 @@ public class GunManager : MonoBehaviour
     void Update()
     {
         shotTime -= Time.deltaTime;
-        anim.SetLayerWeight(gunItem.animLayer, 1);
-    
         if(!playerMovement.disabled){
             
             if(inputManager.reloadValue){
                 StartCoroutine(Reload());
             }
 
-            if(inputManager.shootValue && shotTime <= 0 && ammo > 0){
+            if(inputManager.shootValue && shotTime <= 0 && ammo > 0 && canShoot){
                 switch (currentFireType)
                 {
                     case FireType.semiAuto:
@@ -126,13 +166,19 @@ public class GunManager : MonoBehaviour
                     if(aiming){
                         aiming = false;
                         inputManager.aimValue = false;
+                        weaponSway.aiming = true;
+                        weaponRecoil.aiming = true;
                     }else{
                         aiming = true;
                         inputManager.aimValue = false;
+                        weaponSway.aiming = false;
+                        weaponRecoil.aiming = false;
                     }
                 }
             }else{
                 aiming = inputManager.aimValue;
+                weaponSway.aiming = inputManager.aimValue;
+                weaponRecoil.aiming = inputManager.aimValue;
             }
 
             if(inputManager.changeFireModeValue){
@@ -142,25 +188,31 @@ public class GunManager : MonoBehaviour
                     case FireType.semiAuto: 
                         if(gunItem.fireTypes.Contains(FireType.burst)){
                             currentFireType = FireType.burst;
+                            playerUIController.ChangeFireType(FireType.burst);
                         }
                         else if(gunItem.fireTypes.Contains(FireType.fullAuto)){
                             currentFireType = FireType.fullAuto;
+                            playerUIController.ChangeFireType(FireType.fullAuto);
                         }
                     break;
                     case FireType.burst: 
                         if(gunItem.fireTypes.Contains(FireType.fullAuto)){
                             currentFireType = FireType.fullAuto;
+                            playerUIController.ChangeFireType(FireType.fullAuto);
                         }
                         else if(gunItem.fireTypes.Contains(FireType.semiAuto)){
                             currentFireType = FireType.semiAuto;
+                            playerUIController.ChangeFireType(FireType.semiAuto);
                         }
                     break;
                     case FireType.fullAuto: 
                         if(gunItem.fireTypes.Contains(FireType.semiAuto)){
                             currentFireType = FireType.semiAuto;
+                            playerUIController.ChangeFireType(FireType.semiAuto);
                         }
                         else if(gunItem.fireTypes.Contains(FireType.burst)){
                             currentFireType = FireType.burst;
+                            playerUIController.ChangeFireType(FireType.burst);
                         }
                     break;
                 }
@@ -212,17 +264,38 @@ public class GunManager : MonoBehaviour
                 inputManager.changeFireModeValue = false;
             }
             
-            anim.SetBool("SideGrip", hasSideGrip);
+            if(inputManager.checkAmmoValue){
+                StartCoroutine(CheckAmmo());
+            }
             anim.SetBool("Aiming", aiming);
         }
     }
 
+    public IEnumerator CheckAmmo()
+    {
+        inputManager.checkAmmoValue = false;
+        playerUIController.ammoUI.gameObject.SetActive(true);
+        playerUIController.ammoText.text = ammo.ToString();
+        yield return new WaitForSeconds(gunItem.reloadTime);
+        playerUIController.ammoUI.gameObject.SetActive(false);
+    }
+
     public IEnumerator Reload()
     {
+        canShoot = false;
         anim.SetBool("Reload", true);
         yield return new WaitForSeconds(gunItem.reloadTime);
         anim.SetBool("Reload", false);
+        if(gripAttachment){
+            for (int i = 0; i < gripAttachments.Count; i++)
+            {
+                if(gripAttachments[i].attachmentItem == gripAttachment){
+                }
+            }
+        }else{
+        }
         ammo = gunItem.maxAmmo;
+        canShoot = true;
     }
 
     public IEnumerator BurstShoot()
@@ -238,6 +311,7 @@ public class GunManager : MonoBehaviour
         inputManager.shootValue = false;
         PhotonNetwork.Instantiate(Path.Combine("Bullets",  bulletItem.bulletName), shootPoint.position, shootPoint.rotation);
         ammo--;
+        weaponRecoil.RecoilFire();
         //AudioManager.instance.PlayAudio(gunItem.shootPack.clips[Random.Range(0, gunItem.shootPack.clips.Count)].clipName, "Guns", false);
     }
 
@@ -245,5 +319,6 @@ public class GunManager : MonoBehaviour
     {
         PhotonNetwork.Instantiate(Path.Combine("Bullets",  bulletItem.bulletName), shootPoint.position, shootPoint.rotation);
         ammo--;
+        weaponRecoil.RecoilFire();
     }
 }

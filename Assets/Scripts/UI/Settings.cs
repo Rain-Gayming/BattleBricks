@@ -103,17 +103,20 @@ public class Settings : MonoBehaviour
             case 0: 
                 fullscreenValue.valueText.text = "Exclusive Fullscreen";
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                Screen.fullScreen = true;
             break;  
 
             case 1:             
                 fullscreenValue.valueText.text = "Fullscreen Windowed";
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                Screen.fullScreen = true;
             break; 
 
             case 2: 
                 fullscreenValue.valueText.text = "Windowed";
                 Screen.fullScreenMode = FullScreenMode.Windowed;
-            break;           
+                Screen.fullScreen = false;
+            break;
         }    
         #region audio
         audioMixer.SetFloat("MasterVolume", masterVolSlider.value);

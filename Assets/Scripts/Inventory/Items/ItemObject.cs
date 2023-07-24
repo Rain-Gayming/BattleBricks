@@ -16,6 +16,11 @@ public class ItemObject : ScriptableObject
     public ItemType itemType;
     [BoxGroup("Basic Info")]
     public int itemID;
+    [BoxGroup("Basic Info")]
+    public bool equippable;
+
+    [BoxGroup("Armour Info")][ShowIf("itemType", ItemType.armour)]
+    public ArmourType armourType;
     
     [BoxGroup("References")]
     [HideInInspector]public bool isBase;
@@ -29,6 +34,12 @@ public class ItemObject : ScriptableObject
     [ShowIf("isBase")] public BulletItem bulletReference;
     [BoxGroup("References")]
     [ShowIf("isBase")] public AttachmentItem attachmentReference;
+    [BoxGroup("References")]
+    [ShowIf("isBase")] 
+    public ArmourItem armourReference;
+    [BoxGroup("References")]
+    [ShowIf("isBase")] 
+    public GrenadeItem grenadeReference;
 }
 
 [System.Serializable]
@@ -48,10 +59,15 @@ public class InventoryItem
     [BoxGroup("Weapons")]
     public AttachmentItem barrel;
 
-    public InventoryItem(ItemObject _item, int _amount)
+    public InventoryItem(ItemObject _item, int _amount, AttachmentItem _scope, AttachmentItem _front, AttachmentItem _grip, AttachmentItem _side, AttachmentItem _barrel)
     {
         item = _item;
         amount = _amount;
+        scope = _scope;
+        frontGrip = _front;
+        grip = _grip;
+        side = _side;
+        barrel = _barrel;
     }
 
 }
@@ -61,26 +77,41 @@ public class SaveInventoryItem
 {
     public int id;
     public int amount;
-    public SaveInventoryItem(int _id, int _amount)
+    public int scopeID;
+    public int frontID;
+    public int gripID;
+    public int sideID;
+    public int barrelID;
+    public SaveInventoryItem(int _id, int _amount, int _scopeID, int _frontID, int _gripID, int _sideID, int _barrelID)
     {
         id = _id;
         amount = _amount;
+        scopeID = _scopeID;
+        frontID = _frontID;
+        gripID = _gripID;
+        sideID = _sideID;
+        barrelID = _barrelID;
     }
 }
 
 public enum ItemType
 {
     basic,
-    head,
-    chest,
-    legs,
-    feet,
-    wrist,
-    back,
+    armour,
     gun,
     melee,
     grenade,
     equipment,
     attachment,
     bullet
+}
+
+public enum ArmourType
+{    
+    head,
+    chest,
+    legs,
+    feet,
+    wrist,
+    back,
 }

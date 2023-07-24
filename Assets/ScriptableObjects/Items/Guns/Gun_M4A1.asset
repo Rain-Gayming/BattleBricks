@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c99e868cd9ed841bbfe5f0aa5b8bdb, type: 3}
+  m_Name: Gun_M4A1
+  m_EditorClassIdentifier: 
+  itemName: M4A1
+  itemDescription: The M4A1 is a gas-operated, rotating bolt, magazine fed carbine.
+    The M4A1 is an automatic variant of the M4 carbine, which is limited to semi-automatic
+    and 3-round burst fire modes. The M4A1 was designed from the M4 and was adopted
+    by the US Army in 2012.
+  itemIcon: {fileID: 21300000, guid: 2fb83ea89df639b43a22d707d3c22af1, type: 3}
+  itemType: 7
+  itemID: 0
+  isBase: 0
+  baseItem: {fileID: 11400000, guid: b01ee343117a3444f8be4f00e682e91e, type: 2}
+  weaponReference: {fileID: 0}
+  gunReference: {fileID: 0}
+  bulletReference: {fileID: 0}
+  attachmentReference: {fileID: 0}
+  fireRateAuto: 0.075
+  fireRateSemi: 0.05
+  burstRate: 0
+  range: 1080
+  maxAmmo: 30
+  reloadTime: 3
+  fireTypes: 000000000100000002000000
+  scopeAttachmentPack: {fileID: 11400000, guid: db94a20665b65004e9993f10ecfb3e19,
+    type: 2}
+  barrelAttachmentPack: {fileID: 11400000, guid: 67e1a26d64806984ebe1dc52438aa597,
+    type: 2}
+  gripAttachmentPack: {fileID: 11400000, guid: 5f90ca927c133d9468f659e0a1edf645, type: 2}
+  frontGripAttachmentPack: {fileID: 11400000, guid: 5e66538712d5ad34bab4713d94f5099e,
+    type: 2}
+  sideAttachmentPack: {fileID: 11400000, guid: ce69ed50522e82146a06803548e76b8a, type: 2}
+  shootPack: {fileID: 11400000, guid: 7ca315c0a34f80344be4174f58107c5a, type: 2}
+  idleAnim: {fileID: 7400000, guid: 39e18e4cfc10aa741995d976158fd98d, type: 2}
+  sideGripAnim: {fileID: 7400000, guid: 8fbfcb22b41bd1f4387878b7207bbfd7, type: 2}
+  animLayer: 0
+  weight: 0.05
+  recoilX: -2
+  recoilY: -2
+  recoilZ: 0.35
+  aimRecoilX: -1.5
+  aimRecoilY: -1.5
+  aimRecoilZ: 0.25

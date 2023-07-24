@@ -62,13 +62,15 @@ public class InputManager : MonoBehaviour
     public bool changeFireModeValue;
     [BoxGroup("Combat")]
     public bool reloadValue;
+    [BoxGroup("Combat")]
+    public bool checkAmmoValue;
 #endregion
     [BoxGroup("Camera")]
     public Vector2 lookValue;
 
     [BoxGroup("UI Manager")]
     public bool pauseValue;
-    public bool interact;
+    public bool interactValue;
 
     private void OnEnable() {
         saveFile = Application.persistentDataPath + "/keybindings.json";
@@ -137,6 +139,8 @@ public class InputManager : MonoBehaviour
         inputs.Combat.ChangeFireMode.canceled += _ => changeFireModeValue = false;
         inputs.Combat.Reload.performed += _ => reloadValue = true;
         inputs.Combat.Reload.canceled += _ => reloadValue = false;
+        inputs.Combat.CheckAmmo.performed += _ => checkAmmoValue = true;
+        inputs.Combat.CheckAmmo.canceled += _ => checkAmmoValue = false;
 #endregion
 
 #region camera
@@ -148,8 +152,8 @@ public class InputManager : MonoBehaviour
 
         inputs.UI.Pause.performed += _ => pauseValue = true;
         inputs.UI.Pause.canceled += _ => pauseValue = false;
-        inputs.UI.Interact.performed += _ => interact = true;
-        inputs.UI.Interact.canceled += _ => interact = false;
+        inputs.UI.Interact.performed += _ => interactValue = true;
+        inputs.UI.Interact.canceled += _ => interactValue = false;
 #endregion
     }
     

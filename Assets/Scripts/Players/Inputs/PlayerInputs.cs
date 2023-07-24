@@ -332,6 +332,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CheckAmmo"",
+                    ""type"": ""Button"",
+                    ""id"": ""06ba1363-5fc9-410b-bffa-8015804f0cb0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -510,6 +519,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52651983-5352-4cb7-959c-cf36f01cad0d"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""CheckAmmo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -662,6 +682,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Combat_Aim = m_Combat.FindAction("Aim", throwIfNotFound: true);
         m_Combat_ChangeFireMode = m_Combat.FindAction("ChangeFireMode", throwIfNotFound: true);
         m_Combat_Reload = m_Combat.FindAction("Reload", throwIfNotFound: true);
+        m_Combat_CheckAmmo = m_Combat.FindAction("CheckAmmo", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
@@ -819,6 +840,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Combat_Aim;
     private readonly InputAction m_Combat_ChangeFireMode;
     private readonly InputAction m_Combat_Reload;
+    private readonly InputAction m_Combat_CheckAmmo;
     public struct CombatActions
     {
         private @PlayerInputs m_Wrapper;
@@ -834,6 +856,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Combat_Aim;
         public InputAction @ChangeFireMode => m_Wrapper.m_Combat_ChangeFireMode;
         public InputAction @Reload => m_Wrapper.m_Combat_Reload;
+        public InputAction @CheckAmmo => m_Wrapper.m_Combat_CheckAmmo;
         public InputActionMap Get() { return m_Wrapper.m_Combat; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -876,6 +899,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @CheckAmmo.started += instance.OnCheckAmmo;
+            @CheckAmmo.performed += instance.OnCheckAmmo;
+            @CheckAmmo.canceled += instance.OnCheckAmmo;
         }
 
         private void UnregisterCallbacks(ICombatActions instance)
@@ -913,6 +939,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @CheckAmmo.started -= instance.OnCheckAmmo;
+            @CheckAmmo.performed -= instance.OnCheckAmmo;
+            @CheckAmmo.canceled -= instance.OnCheckAmmo;
         }
 
         public void RemoveCallbacks(ICombatActions instance)
@@ -1069,6 +1098,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnChangeFireMode(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnCheckAmmo(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

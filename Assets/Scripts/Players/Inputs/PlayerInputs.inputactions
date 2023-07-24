@@ -310,6 +310,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CheckAmmo",
+                    "type": "Button",
+                    "id": "06ba1363-5fc9-410b-bffa-8015804f0cb0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -486,6 +495,17 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52651983-5352-4cb7-959c-cf36f01cad0d",
+                    "path": "<Keyboard>/v",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "CheckAmmo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

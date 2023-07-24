@@ -18,5 +18,6 @@ public class BulletItem : ItemObject
 public enum Caliber
 {
     _45acp,
-    _556x45Nato
+    _556x45Nato,
+    _300ACBlackout
 }

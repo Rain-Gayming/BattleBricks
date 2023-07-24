@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85fec50b042e25441858e78af218557f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletItem: {fileID: 11400000, guid: 76741cfcde0b0af4e852eba290e39107, type: 2}
+  bulletItem: {fileID: 11400000, guid: a0643fa314826084995b584f9cf5c796, type: 2}
   rb: {fileID: 1599411567065752268}
 --- !u!114 &-501014522013782802
 MonoBehaviour:

@@ -26,6 +26,21 @@ public class PlayerUIController : MonoBehaviour
     [BoxGroup("Account")]
     public TMP_Text nameText;
 
+    [BoxGroup("Weapons")]
+    public GameObject ammoUI;
+    [BoxGroup("Weapons")]
+    public TMP_Text ammoText;
+    
+    [BoxGroup("Weapons/Fire Mode")]
+    public Image fireModeIcon;
+    [BoxGroup("Weapons/Fire Mode")]
+    public FireType fireType;
+    [BoxGroup("Weapons/Fire Mode")]
+    public Sprite fullAutoSprite;
+    [BoxGroup("Weapons/Fire Mode")]
+    public Sprite semiAutoSprite;
+    [BoxGroup("Weapons/Fire Mode")]
+    public Sprite burstSprite;
     
     [BoxGroup("Interaction")]
     public GameObject interactionUI;
@@ -52,6 +67,22 @@ public class PlayerUIController : MonoBehaviour
 
         speedText.text = playerMovement.rb.velocity.ToString();
         nameText.text = playerController.info.displayName;
+    }
+
+    public void ChangeFireType(FireType newType)
+    {
+        switch (newType)
+        {
+            case FireType.semiAuto:
+                fireModeIcon.sprite = semiAutoSprite;
+            break;
+            case FireType.fullAuto:
+                fireModeIcon.sprite = fullAutoSprite;
+            break;
+            case FireType.burst:
+                fireModeIcon.sprite = burstSprite;
+            break;
+        }
     }
 
     public void AddNewInteraction(Interaction interaction)

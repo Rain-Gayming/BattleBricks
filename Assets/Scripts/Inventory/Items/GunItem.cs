@@ -37,6 +37,23 @@ public class GunItem : ItemObject
     public AnimationClip sideGripAnim;
     [BoxGroup("Gun Info/Animation")]
     public int animLayer;
+    
+    [BoxGroup("Sway")]
+    public float weight;
+
+    [BoxGroup("Recoil")]
+    public float recoilX;
+    [BoxGroup("Recoil")]
+    public float recoilY;
+    [BoxGroup("Recoil")]
+    public float recoilZ;
+
+    [BoxGroup("Aiming Recoil")]
+    public float aimRecoilX;
+    [BoxGroup("Aiming Recoil")]
+    public float aimRecoilY;
+    [BoxGroup("Aiming Recoil")]
+    public float aimRecoilZ;
 }
 
 public enum FireType
