@@ -350,6 +350,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
                 case ItemType.grenade:
                     grenadeItem = ScriptableObject.CreateInstance<GrenadeItem>();
                     itemObject.grenadeReference = grenadeItem;
+                    grenadeItem.baseItem = itemObject;
 
                     grenadeItem.damage = grenadeDamage;
                     grenadeItem.fragments = grenadeFragments;
@@ -370,7 +371,7 @@ public class ScriptableCreator : OdinMenuEditorWindow
                 AssetDatabase.CreateAsset(bulletItem, "Assets/ScriptableObjects/Items/Bullets/Bullet_" + itemName + ".asset");
             }
             if(grenadeItem){
-                AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Grenade/ItemRefGrenade_" + itemName + ".asset");
+                AssetDatabase.CreateAsset(itemObject, "Assets/ScriptableObjects/Items/ItemReferences/Grenades/ItemRefGrenade_" + itemName + ".asset");
                 AssetDatabase.CreateAsset(grenadeItem, "Assets/ScriptableObjects/Items/Grenades/Grenade_" + itemName + ".asset");
             }
             if(attachmentItem){

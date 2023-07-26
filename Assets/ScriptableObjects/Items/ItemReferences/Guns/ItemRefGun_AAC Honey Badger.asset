@@ -10,19 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b82327d8586b5949b00814eecd85663, type: 3}
-  m_Name: ItemReferenceGun_AAC Honey Badger
+  m_Name: ItemRefGun_AAC Honey Badger
   m_EditorClassIdentifier: 
-  itemName: AAC Hoeny Badger
+  itemName: AAC Honey Badger
   itemDescription: 'The AAC Honey Badger is a highly specialized firearm designed
     for compactness, maneuverability, and quiet operation. Originally developed by
     Advanced Armament Corporation (AAC) in collaboration with the United States military. '
   itemIcon: {fileID: 21300000, guid: 103824326608f0a4cacca71848d59a6e, type: 3}
-  itemType: 7
+  itemType: 2
   itemID: 0
   equippable: 1
+  armourType: 0
   isBase: 1
   baseItem: {fileID: 0}
   weaponReference: {fileID: 0}
   gunReference: {fileID: 11400000, guid: 63473c79631b95848878ccf8d5ce5ef9, type: 2}
   bulletReference: {fileID: 0}
   attachmentReference: {fileID: 0}
+  armourReference: {fileID: 0}
+  grenadeReference: {fileID: 0}

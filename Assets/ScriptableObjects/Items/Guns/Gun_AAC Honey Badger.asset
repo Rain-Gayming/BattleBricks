@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: AAC Hoeny Badger
   itemDescription: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 103824326608f0a4cacca71848d59a6e, type: 3}
   itemType: 7
   itemID: 0
+  equippable: 0
+  armourType: 0
   isBase: 0
   baseItem: {fileID: 11400000, guid: 9feb1fe0013438f4a9f25f51fe56f7e8, type: 2}
   weaponReference: {fileID: 0}
   gunReference: {fileID: 0}
   bulletReference: {fileID: 0}
   attachmentReference: {fileID: 0}
+  armourReference: {fileID: 0}
+  grenadeReference: {fileID: 0}
   fireRateAuto: 0.15
   fireRateSemi: 0.1
   burstRate: 0

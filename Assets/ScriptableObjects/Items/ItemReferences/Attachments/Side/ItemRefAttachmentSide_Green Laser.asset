@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b82327d8586b5949b00814eecd85663, type: 3}
-  m_Name: ItemReferenceGun_M4A1
+  m_Name: ItemRefAttachmentSide_Green Laser
   m_EditorClassIdentifier: 
-  itemName: M4A1
+  itemName: Green Laser
   itemDescription: 
-  itemIcon: {fileID: 21300000, guid: 2fb83ea89df639b43a22d707d3c22af1, type: 3}
-  itemType: 7
+  itemIcon: {fileID: 0}
+  itemType: 6
   itemID: 0
-  equippable: 1
+  equippable: 0
+  armourType: 0
   isBase: 1
-  baseItem: {fileID: 11400000}
+  baseItem: {fileID: 0}
   weaponReference: {fileID: 0}
-  gunReference: {fileID: 11400000, guid: 0a9337b876abb6748bc6170d765ef115, type: 2}
+  gunReference: {fileID: 0}
   bulletReference: {fileID: 0}
   attachmentReference: {fileID: 0}
+  armourReference: {fileID: 0}
+  grenadeReference: {fileID: 0}

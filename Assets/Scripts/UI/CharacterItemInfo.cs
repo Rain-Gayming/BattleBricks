@@ -7,6 +7,9 @@ using Sirenix.OdinInspector;
 public class CharacterItemInfo : MonoBehaviour
 {
     public ItemObject item;
+    
+    [BoxGroup("Items")]
+    public EquipmentSlot primarySlot;
 
     [BoxGroup("Gun Info")]
     public GameObject gunArea;
@@ -31,6 +34,15 @@ public class CharacterItemInfo : MonoBehaviour
     public TMP_Text extraSlotText;
     [BoxGroup("Armour Info")]
     //public TMP_Text durabilityText;
+    
+    [BoxGroup("Grenade Info")]
+    public GameObject grenadeArea;
+    [BoxGroup("Grenade Info")]
+    public TMP_Text grenadeDamageText;
+    [BoxGroup("Grenade Info")]
+    public TMP_Text grenadeVelocityText;
+    [BoxGroup("Grenade Info")]
+    public TMP_Text grenadeFragmentsText;
 
     private void Update()
     {
@@ -40,6 +52,7 @@ public class CharacterItemInfo : MonoBehaviour
                 case ItemType.gun:
                     gunArea.SetActive(true);
                     armourArea.SetActive(false);
+                    grenadeArea.SetActive(false);
                     fireRateText.text = "RPM: " + item.gunReference.fireRateAuto;
                     maxAmmoText.text = "Max Ammo: " + item.gunReference.maxAmmo;
                     reloadTimeText.text = "Reload Time: " + item.gunReference.reloadTime;
@@ -50,9 +63,20 @@ public class CharacterItemInfo : MonoBehaviour
                 case ItemType.armour:
                     gunArea.SetActive(false);
                     armourArea.SetActive(true);
+                    grenadeArea.SetActive(false);
                     armourValueText.text = "Armour Value: " + item.armourReference.armourReference;
                     radiationProtectionText.text = "Radiation Protection: " + item.armourReference.radiationProtection;
                     extraSlotText.text = "Extra Slots: " + item.armourReference.extraSlots;
+                break;
+
+                case ItemType.grenade:
+                    gunArea.SetActive(false);
+                    armourArea.SetActive(false);
+                    grenadeArea.SetActive(true);
+
+                    grenadeDamageText.text = "Damage: " + item.grenadeReference.damage;
+                    grenadeVelocityText.text = "Velocity: " + item.grenadeReference.velocity;
+                    grenadeFragmentsText.text = "Fragments: " + item.grenadeReference.fragments;
                 break;
             }  
         }  
